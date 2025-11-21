@@ -1,8 +1,6 @@
 name: good
 on:
-    push:
-        branches:
-            - main
+    workflow_dispatch:
 jobs:
      initialize:
         runs-on: ubuntu-latest
@@ -21,9 +19,9 @@ jobs:
           - name: terraform plan
             working-directory: ./modules/s3_bucket
             run: terraform plan -out=tfplan
-            id: showing new changes made.....
+            id: new_infra
           - name: terraform apply
             working-directory: ./modules/s3_bucket
             run: terraform apply tfplan
-            id: Applying changes......
+            id: applied_changes
             

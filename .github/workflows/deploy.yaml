@@ -1,0 +1,29 @@
+name: good
+on:
+    push:
+        branches:
+            - main
+jobs:
+     initialize:
+        runs-on: ubuntu-latest
+        steps:
+          - uses: hashicorp/setup-terraform@v3
+          - name:  configure aws credentials
+            uses: aws-actions/configure-aws-credentials@v5.1.0
+            with:
+              aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+              aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+              aws-region: us-east-1
+          - name: terraform init
+            working-directory: ./modules/s3_bucket
+            run: terraform init
+            id: INITIALIZING
+          - name: terraform plan
+            working-directory: ./modules/s3_bucket
+            run: terraform plan -out=tfplan
+            id: showing new changes made.....
+          - name: terraform apply
+            working-directory: ./modules/s3_bucket
+            run: terraform apply tfplan
+            id: Applying changes......
+            

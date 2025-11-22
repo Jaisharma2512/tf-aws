@@ -5,6 +5,8 @@ jobs:
      initialize:
         runs-on: ubuntu-latest
         steps:
+          - name: checkout code
+            uses: actions/checkout@v5
           - uses: hashicorp/setup-terraform@v3
           - name:  configure aws credentials
             uses: aws-actions/configure-aws-credentials@v5.1.0

@@ -5,3 +5,9 @@ variable "s3_bucket" {
     tags = map(string)
  } ))
 }
+
+variable "enable_versioning" {
+    type = bool
+    description = "enable logging for s3 bucket"
+    default = false
+}

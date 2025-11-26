@@ -1,17 +1,19 @@
 s3_bucket = {
   Paeti-dev = {
-    bucket      = "Paeti-dev"       # required
+    bucket      = "paeti-dev"       # required
     Environment = "dev"
     tags = {
       project = "myproject"
     }
+    enable_versioning = true
   }
 
   Jar-dev = {
-    bucket      = "Jar-dev"
+    bucket      = "jarun-dev"
     Environment = "dev"
     tags = {
       project = "myproject"
     }
+       enable_versioning = true
   }
 }

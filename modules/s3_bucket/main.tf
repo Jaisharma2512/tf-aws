@@ -12,8 +12,14 @@ resource "aws_s3_bucket" "dabba"{
 )
 }
 
-resource "aws_s3_bucket_acl" "buckets_acl" {
-    for_each = aws_s3_bucket.dabba
-    bucket = each.value.id
-    acl = "private"
+resource "aws_s3_bucket_versioning" "v" {
+    for_each = var.s3_bucket
+    bucket = each.value.dabba.id
+    versioning_configuration{
+      status= each.value.versioning_configuration.status? Enabled:Disabled
+    }
 }
+
+  versioning_configuration {
+    status = "Enabled"
+  }

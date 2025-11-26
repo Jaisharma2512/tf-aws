@@ -10,7 +10,15 @@ resource "aws_s3_bucket" "dabba"{
     },
    each.value.tags
 )
- versioning{
-  enabled = var.enable_versioning
- }
+}
+
+resource "aws_s3_bucket_versioning" "vsng" {
+  for_each = var.s3_bucket
+  bucket = aws_s3_bucket.dabba.id
+  versioning_configuration{
+    status = var.enable_versioning ? "Enabled" : "Suspended"
+  }
+
+
+
 }

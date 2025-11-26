@@ -10,16 +10,7 @@ resource "aws_s3_bucket" "dabba"{
     },
    each.value.tags
 )
+ versioning{
+  enabled = var.enable_versioning
+ }
 }
-
-resource "aws_s3_bucket_versioning" "v" {
-    for_each = var.s3_bucket
-    bucket = each.value.dabba.id
-    versioning_configuration{
-      status= each.value.versioning_configuration.status? Enabled:Disabled
-    }
-}
-
-  versioning_configuration {
-    status = "Enabled"
-  }
